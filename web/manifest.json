@@ -1,6 +1,6 @@
 {
-    "name": "my_web_app",
-    "short_name": "my_web_app",
+    "name": "good_key",
+    "short_name": "good_key",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
