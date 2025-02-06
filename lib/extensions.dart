@@ -1,4 +1,6 @@
+import 'package:collection/collection.dart';
 import 'package:intl/intl.dart';
+import 'package:my_web_app/models.dart';
 
 extension DateTimeExtension on DateTime {
   String get myText {
@@ -12,5 +14,11 @@ extension DateTimeExtension on DateTime {
     } else {
       return DateFormat('M月d日').format(this);
     }
+  }
+}
+
+extension A on List<Resident> {
+  Resident? getUser(String? userId) {
+    return firstWhereOrNull((e) => e.id == userId);
   }
 }
