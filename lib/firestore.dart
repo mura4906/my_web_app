@@ -1,5 +1,6 @@
 import 'dart:core';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart';
 import 'package:my_web_app/models.dart';
 
 void fireBaseTestCall() async {
@@ -42,7 +43,11 @@ class FirestoreService {
     final keyList = doc.docs.map((e) {
       return HouseKey.fromJson(e.id, e.data());
     }).toList();
-    return keyList;
+    if (kDebugMode) {
+      return keyList;
+    } else {
+      return keyList.where((e) => e.name != 'テスト').toList();
+    }
   }
 
   /* Read 読み出し */
@@ -52,7 +57,11 @@ class FirestoreService {
       final i = Resident.fromJson(e.id, e.data());
       return i;
     }).toList();
-    return residentList;
+    if (kDebugMode) {
+      return residentList;
+    } else {
+      return residentList.where((e) => e.name != 'tester').toList();
+    }
   }
 
   Future<void> updateResident(Resident resident) async {
