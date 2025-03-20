@@ -52,6 +52,24 @@ class ResidentList extends _$ResidentList {
       }
     }).toList());
   }
+
+  deleteResident(Resident resident) {
+    if (state.value == null) {
+      return;
+    }
+    final newResidents = state.value!;
+    newResidents.removeWhere((e) => e.id == resident.id);
+    state = AsyncData(newResidents);
+  }
+
+  addResident(Resident resident) {
+    if (state.value == null) {
+      return;
+    }
+    final newResidents = state.value!;
+    newResidents.add(resident);
+    state = AsyncData(newResidents);
+  }
 }
 
 @Riverpod(keepAlive: true)

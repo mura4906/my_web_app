@@ -64,6 +64,10 @@ class FirestoreService {
     }
   }
 
+  Future<void> deleteResident(String residentId) async {
+    await db.collection('residents').doc(residentId).delete();
+  }
+
   Future<void> updateResident(Resident resident) async {
     await db.collection('residents').doc(resident.id).update(resident.toJson());
   }
