@@ -24,7 +24,7 @@ class OwnerPage extends HookConsumerWidget {
               Expanded(
                   child: Text(
                 user.name,
-                style: TextStyle(fontSize: 18),
+                style: const TextStyle(fontSize: 18),
               )),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
