@@ -16,28 +16,21 @@ class MyChoiceChip extends HookConsumerWidget {
       selectionNotifier.value = selection;
       return null;
     }, [selection]);
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        const SizedBox(height: 10.0),
-        Wrap(
-          spacing: 5.0,
-          children: Location.values.map((e) {
-            return ChoiceChip.elevated(
-              showCheckmark: false,
-              label: Text(e.title),
-              selected: e == selectionNotifier.value,
-              onSelected: (bool selected) {
-                if (selected) {
-                  selectionNotifier.value = e;
-                  onChanged(e);
-                }
-              },
-            );
-          }).toList(),
-        ),
-      ],
+    return Wrap(
+      spacing: 5.0,
+      children: Location.values.map((e) {
+        return ChoiceChip.elevated(
+          showCheckmark: false,
+          label: Text(e.title),
+          selected: e == selectionNotifier.value,
+          onSelected: (bool selected) {
+            if (selected) {
+              selectionNotifier.value = e;
+              onChanged(e);
+            }
+          },
+        );
+      }).toList(),
     );
   }
 }

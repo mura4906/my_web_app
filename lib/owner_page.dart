@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:my_web_app/extensions.dart';
 import 'package:my_web_app/my_choice_chip.dart';
 import 'package:my_web_app/firestore.dart';
 import 'package:my_web_app/models.dart';
@@ -18,13 +19,20 @@ class OwnerPage extends HookConsumerWidget {
       child: Column(
         children: [
           Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Expanded(child: Text(user.name)),
+              Expanded(
+                  child: Text(
+                user.name,
+                style: TextStyle(fontSize: 18),
+              )),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   MyChoiceChip(user.location, (location) {
-                    final newUser = user.copyWith(location: location);
+                    final newMemo = user.memo.copyWith(time: DateTime.now());
+                    final newUser =
+                        user.copyWith(location: location, memo: newMemo);
                     ref
                         .read(residentListProvider.notifier)
                         .updateResident(newUser);
@@ -69,7 +77,15 @@ class OwnerPage extends HookConsumerWidget {
                       .updateResident(newUser);
                   FirestoreService.instance.updateResident(newUser);
                 }),
-          )
+          ),
+          SizedBox(
+            width: double.infinity,
+            child: Text(
+              user.memo.time?.myText ?? '',
+              style: const TextStyle(fontSize: 11),
+              textAlign: TextAlign.end,
+            ),
+          ),
         ],
       ),
     );
